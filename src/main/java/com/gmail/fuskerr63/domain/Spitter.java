@@ -1,4 +1,4 @@
-package com.gmail.fuskerr63.dao;
+package com.gmail.fuskerr63.domain;
 
 public class Spitter {
     private int id;

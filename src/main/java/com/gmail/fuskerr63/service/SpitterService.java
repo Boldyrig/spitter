@@ -1,6 +1,6 @@
 package com.gmail.fuskerr63.service;
 
-import com.gmail.fuskerr63.dao.Spitter;
+import com.gmail.fuskerr63.domain.Spitter;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class SpitterService implements ISpitterService{
     );
 
     @Override
-    public List<Spitter> getRecent(int count) {
+    public List<Spitter> getRecentSpitters(int count) {
         return spitters;
     }
 }
