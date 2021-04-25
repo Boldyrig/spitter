@@ -1,24 +1,59 @@
 package com.gmail.fuskerr63.service;
 
+import com.gmail.fuskerr63.domain.Message;
 import com.gmail.fuskerr63.domain.Spitter;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class SpitterService implements ISpitterService{
-    private List<Spitter> spitters = Arrays.asList(
-            new Spitter(0, "Jack", "bla bla bla", "tag1", new Date()),
-            new Spitter(1, "July", "bla bla bla", "tag1", new Date()),
-            new Spitter(2, "Semen", "bla bla bla", "tag1", new Date()),
-            new Spitter(3, "Sergay", "bla bla bla", "tag1", new Date()),
-            new Spitter(4, "Mock", "bla bla bla", "tag1", new Date())
+    private final List<Spitter> spitters = Arrays.asList(
+            new Spitter(0, "Jack", "nagibator"),
+            new Spitter(1, "July", "julyyy"),
+            new Spitter(2, "Semen", "semenJS"),
+            new Spitter(3, "Sergay", "imgay"),
+            new Spitter(4, "Mock", "jorik2021")
+    );
+
+    private final List<Message> messages = Arrays.asList(
+            new Message(0, 2, "Hello?", "", new Date(2021, 9, 3)),
+            new Message(0, 3, "fff?", "", new Date(2020, 7, 3)),
+            new Message(0, 4, "Helsdfsdflo?", "", new Date(2021, 9, 3)),
+            new Message(0, 2, "Heldfddlo?", "", new Date(2019, 9, 3)),
+            new Message(0, 1, "Helddfdsflo?", "", new Date(2021, 9, 3)),
+            new Message(0, 0, "Heasdfsadfllo?", "", new Date(2021, 9, 3)),
+            new Message(0, 0, "Helasdfsadflo?", "", new Date(2021, 9, 3)),
+            new Message(0, 2, "Helasdfsdflo?", "", new Date(2021, 9, 3)),
+            new Message(0, 4, "Heldfdsflo?", "", new Date(2021, 9, 3))
     );
 
     @Override
-    public List<Spitter> getRecentSpitters(int count) {
-        return spitters;
+    public List<Message> getRecentSpitters(int count) {
+        return messages;
+    }
+
+    @Override
+    public List<Message> getMessagesForSpitter(Spitter spitter) {
+        List<Message> messages = new ArrayList<>();
+        for(Message message : this.messages) {
+            if(message.getUserId() == spitter.getId()) {
+                messages.add(message);
+            }
+        }
+        return messages;
+    }
+
+    @Override
+    public Spitter getSpitter(String name) {
+        for(Spitter spitter : spitters) {
+            if(spitter.getName().equals(name)) {
+                return spitter;
+            }
+        }
+        return null;
     }
 }

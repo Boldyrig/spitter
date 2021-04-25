@@ -1,20 +1,14 @@
 package com.gmail.fuskerr63.domain;
 
-import java.util.Date;
-
 public class Spitter {
     private final int id;
     private final String name;
-    public final String message;
-    private final String tag;
-    private final Date date;
+    private final String username;
 
-    public Spitter(int id, String name, String message, String tag, Date date) {
+    public Spitter(int id, String name, String username) {
         this.id = id;
         this.name = name;
-        this.message = message;
-        this.tag = tag;
-        this.date = date;
+        this.username = username;
     }
 
     public int getId() {
@@ -25,15 +19,7 @@ public class Spitter {
         return name;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public Date getDate() {
-        return date;
+    public String getUsername() {
+        return username;
     }
 }

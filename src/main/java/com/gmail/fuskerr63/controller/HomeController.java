@@ -20,7 +20,7 @@ public class HomeController {
 
     @RequestMapping({"/", "/home"})
     public String showHomePage(Map<String, Object> model) {
-        model.put("spitters", spitterService.getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE));
+        model.put("messages", spitterService.getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE));
         return "home";
     }
 }

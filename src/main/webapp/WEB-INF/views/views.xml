@@ -17,4 +17,8 @@
         <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
     </definition>
 
+    <definition name="messages/list" extends="template">
+        <put-attribute name="content" value="/WEB-INF/views/messages/list.jsp"/>
+    </definition>
+
 </tiles-definitions>

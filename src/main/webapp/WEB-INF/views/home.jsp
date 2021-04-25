@@ -8,10 +8,10 @@
     <h2>Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible</h2>
     <h3>Java was originally developed by James Gosling at Sun Microsystems</h3>
     <ol class="spittle-list">
-        <c:forEach var="spitter" items="${spitters}">
-            <s:url value="/spitters/{spitterName}" var="spitter_url">
-                <s:param name="spitterName" value="${spitter.name}"/>
-            </s:url>
+        <c:forEach var="message" items="${messages}">
+            <%--<s:url value="/spitters/{spitterName}" var="spitter_url">
+                <s:param name="spitterName" value="${message.}"/>
+            </s:url>--%>
 
             <li>
                 <span class="spittleListImage">
@@ -21,14 +21,14 @@
                          align="middle"/>
                 </span>
                 <span class="spitterListText">
-                    <a href="${spitter_url}">
-                        <c:out value="${spitter.name}"/>
+                   <%-- <a href="${spitter_url}">
+                        <c:out value="${message.userId}"/>
                         <span> : </span>
-                        <c:out value="${spitter.id}"/>
-                    </a>
-                    <c:out value="${spitter.message}"/><br/>
+                        <c:out value="${message.id}"/>
+                    </a>--%>
+                    <c:out value="${message.text}"/><br/>
                     <small>
-                        <fmt:formatDate value="${spitter.date}" pattern="hh:mma MMM d. yyyy"/>
+                        <fmt:formatDate value="${message.date}" pattern="hh:mma MMM d. yyyy"/>
                     </small>
                 </span>
             </li>
