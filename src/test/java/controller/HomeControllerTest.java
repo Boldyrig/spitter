@@ -8,9 +8,13 @@ import com.gmail.fuskerr63.service.SpitterService;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,10 +26,10 @@ public class HomeControllerTest {
     @Test
     public void shouldDisplayRecentSpitters() {
         List<Spitter> spitters = asList(
-                new Spitter(0, "name1", "message1", "tag1"),
-                new Spitter(1, "name2", "message2", "tag2"),
-                new Spitter(2, "name3", "message3", "tag3"),
-                new Spitter(3, "name4", "message4", "tag4")
+                new Spitter(0, "name1", "message1", "tag1", new Date()),
+                new Spitter(1, "name2", "message2", "tag2", new Date()),
+                new Spitter(2, "name3", "message3", "tag3", new Date()),
+                new Spitter(3, "name4", "message4", "tag4", new Date())
         );
 
         ISpitterService spitterService = mock(SpitterService.class);
