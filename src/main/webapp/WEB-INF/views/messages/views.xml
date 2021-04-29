@@ -8,13 +8,13 @@
     <definition name="template"
                 template="/WEB-INF/views/main_template.jsp">
         <put-attribute name="top"
-                        value="/WEB-INF/views/tiles/spittle_form.jsp"/>
+                       value="/WEB-INF/views/tiles/spittle_form.jsp"/>
         <put-attribute name="side"
-                        value="/WEB-INF/views/tiles/signin_signup.jsp"/>
+                       value="/WEB-INF/views/tiles/signin_signup.jsp"/>
     </definition>
 
-    <definition name="home" extends="template">
-        <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+    <definition name="messages/list" extends="template">
+        <put-attribute name="content" value="/WEB-INF/views/messages/list.jsp"/>
     </definition>
 
 </tiles-definitions>

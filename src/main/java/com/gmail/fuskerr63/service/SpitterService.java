@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class SpitterService implements ISpitterService{
-    private final List<Spitter> spitters = Arrays.asList(
+    private List<Spitter> spitters = Arrays.asList(
             new Spitter(0, "Jack", "nagibator"),
             new Spitter(1, "July", "julyyy"),
             new Spitter(2, "Semen", "semenJS"),
@@ -55,5 +55,12 @@ public class SpitterService implements ISpitterService{
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean saveSpitter(Spitter spitter) {
+        spitters = new ArrayList<>(spitters);
+        spitters.add(spitter);
+        return true;
     }
 }
