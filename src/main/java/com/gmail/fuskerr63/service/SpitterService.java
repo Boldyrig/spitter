@@ -48,9 +48,19 @@ public class SpitterService implements ISpitterService{
     }
 
     @Override
-    public Spitter getSpitter(String name) {
+    public Spitter getSpitterByName(String name) {
         for(Spitter spitter : spitters) {
             if(spitter.getName().equals(name)) {
+                return spitter;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Spitter getSpitterByUsername(String username) {
+        for(Spitter spitter : spitters) {
+            if(spitter.getUsername().equals(username)) {
                 return spitter;
             }
         }

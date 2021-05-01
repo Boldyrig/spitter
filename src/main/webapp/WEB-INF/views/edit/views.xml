@@ -13,8 +13,8 @@
                        value="/WEB-INF/views/tiles/signin_signup.jsp"/>
     </definition>
 
-    <definition name="spitter/profile" extends="template">
-        <put-attribute name="content" value="/WEB-INF/views/spitters/profile.jsp"/>
+    <definition name="edit" extends="template">
+        <put-attribute name="content" value="/WEB-INF/views/edit/edit.jsp"/>
     </definition>
 
 </tiles-definitions>

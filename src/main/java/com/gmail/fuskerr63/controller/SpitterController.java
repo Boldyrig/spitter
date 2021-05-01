@@ -2,16 +2,20 @@ package com.gmail.fuskerr63.controller;
 
 import com.gmail.fuskerr63.domain.Spitter;
 import com.gmail.fuskerr63.service.ISpitterService;
+import org.apache.commons.io.FileUtils;
+import org.apache.velocity.texen.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/spitter")
@@ -28,7 +32,7 @@ public class SpitterController {
             @RequestParam("spitter") String name,
             Model model
     ) {
-        Spitter spitter = spitterService.getSpitter(name);
+        Spitter spitter = spitterService.getSpitterByName(name);
         model.addAttribute("spitter", spitter);
         model.addAttribute("messages", spitterService.getMessagesForSpitter(spitter));
         return "messages/list";
@@ -36,22 +40,63 @@ public class SpitterController {
 
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String createSpitterProfile(Model model) {
-        model.addAttribute(new Spitter());
-        return "spitters/edit";
+        model.addAttribute("spitter", new Spitter());
+        return "edit";
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "new")
-    public String addSpitterFromForm(@Valid Spitter spitter, BindingResult bindingResult) {
+    public String addSpitterFromForm(
+            @Valid Spitter spitter,
+            BindingResult bindingResult,
+            @RequestParam(value = "image", required = false)MultipartFile image) {
         if(bindingResult.hasErrors()) {
-            return "spitters/edit";
+            return "edit";
         }
         spitterService.saveSpitter(spitter);
-        return "redirect:/spitters/" + spitter.getUsername();
+
+
+        try {
+            if(!image.isEmpty()) {
+                validateImage(image);
+                saveImage(spitter.getId() + ".jpg", image);
+            }
+        } catch(ImageUploadException e) {
+            bindingResult.reject(e.getMessage());
+            return "edit";
+        }
+
+        return "redirect:/spitter/" + spitter.getUsername();
     }
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showSpitterProfile(@PathVariable String username, Model model) {
-        model.addAttribute(spitterService.getSpitter(username));
-        return "spiters/view";
+        Spitter spitter = spitterService.getSpitterByUsername(username);
+        model.addAttribute(spitter);
+        return "spitter/profile";
+    }
+
+    private void validateImage(MultipartFile image) {
+        if(!image.getContentType().equals("image/jpeg")) {
+            throw new ImageUploadException("Only JPG images accepted");
+        }
+    }
+
+    private void saveImage(String filename, MultipartFile image) throws ImageUploadException {
+        try {
+            File file = new File( "src/main/webapp/resources/" + filename);
+            FileUtils.writeByteArrayToFile(file, image.getBytes());
+        } catch (IOException e) {
+            throw new ImageUploadException("Unable to save image", e);
+        }
+    }
+
+    private static class ImageUploadException extends RuntimeException {
+        public ImageUploadException(String message) {
+            super(message);
+        }
+
+        public ImageUploadException(String message, Throwable throwable) {
+            super(message, throwable);
+        }
     }
 }
