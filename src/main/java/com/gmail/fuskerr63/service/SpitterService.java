@@ -1,7 +1,9 @@
 package com.gmail.fuskerr63.service;
 
+import com.gmail.fuskerr63.dao.SpitterDAO;
 import com.gmail.fuskerr63.domain.Message;
 import com.gmail.fuskerr63.domain.Spitter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class SpitterService implements ISpitterService{
+public class SpitterService implements ISpitterService {
+    @Autowired
+    private SpitterDAO spitterDAO;
+
     private List<Spitter> spitters = Arrays.asList(
             new Spitter(0, "Jack", "nagibator"),
             new Spitter(1, "July", "julyyy"),
@@ -59,18 +64,12 @@ public class SpitterService implements ISpitterService{
 
     @Override
     public Spitter getSpitterByUsername(String username) {
-        for(Spitter spitter : spitters) {
-            if(spitter.getUsername().equals(username)) {
-                return spitter;
-            }
-        }
-        return null;
+        return spitterDAO.getSpitterByUsername(username);
     }
 
     @Override
     public boolean saveSpitter(Spitter spitter) {
-        spitters = new ArrayList<>(spitters);
-        spitters.add(spitter);
+        spitterDAO.addSpitter(spitter);
         return true;
     }
 }

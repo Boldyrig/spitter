@@ -40,6 +40,15 @@ public class Spitter {
         this.username = username;
     }
 
+    public Spitter(int id, String name, String username, String password, String email, boolean updateByEmail) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.updateByEmail = updateByEmail;
+    }
+
     public int getId() {
         return id;
     }
