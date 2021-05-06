@@ -3,12 +3,9 @@ package com.gmail.fuskerr63.controller;
 import com.gmail.fuskerr63.domain.Spitter;
 import com.gmail.fuskerr63.service.ISpitterService;
 import org.apache.commons.io.FileUtils;
-import org.apache.velocity.texen.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,8 +49,12 @@ public class SpitterController {
         if(bindingResult.hasErrors()) {
             return "edit";
         }
-        spitterService.saveSpitter(spitter);
+        boolean isSpitterSaved = spitterService.saveSpitter(spitter);
 
+        if(!isSpitterSaved) {
+            bindingResult.rejectValue("username", "error.spitter", "already exist in database");
+            return "edit";
+        }
 
         try {
             if(!image.isEmpty()) {

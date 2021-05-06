@@ -37,11 +37,13 @@ public class SpitterService implements ISpitterService {
     );
 
     @Override
+    @Deprecated
     public List<Message> getRecentSpitters(int count) {
         return messages;
     }
 
     @Override
+    @Deprecated
     public List<Message> getMessagesForSpitter(Spitter spitter) {
         List<Message> messages = new ArrayList<>();
         for(Message message : this.messages) {
@@ -53,6 +55,7 @@ public class SpitterService implements ISpitterService {
     }
 
     @Override
+    @Deprecated
     public Spitter getSpitterByName(String name) {
         for(Spitter spitter : spitters) {
             if(spitter.getName().equals(name)) {
@@ -69,7 +72,11 @@ public class SpitterService implements ISpitterService {
 
     @Override
     public boolean saveSpitter(Spitter spitter) {
-        spitterDAO.addSpitter(spitter);
-        return true;
+        Spitter spitterDb = getSpitterByUsername(spitter.getUsername());
+        if (spitterDb == null) {
+            spitterDAO.addSpitter(spitter);
+            return true;
+        }
+        return false;
     }
 }
