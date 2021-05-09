@@ -3,15 +3,14 @@ package controller;
 import com.gmail.fuskerr63.controller.HomeController;
 import com.gmail.fuskerr63.domain.Message;
 import com.gmail.fuskerr63.domain.Spitter;
+import com.gmail.fuskerr63.service.IMessageService;
 import com.gmail.fuskerr63.service.ISpitterService;
+import com.gmail.fuskerr63.service.MessageService;
 import com.gmail.fuskerr63.service.SpitterService;
 
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,18 +33,18 @@ public class HomeControllerTest {
         );
 
         List<Message> messages = asList(
-                new Message(0, 2, "text", "tag", new Date()),
-                new Message(1, 0, "text", "tag", new Date()),
-                new Message(2, 1, "text", "tag", new Date()),
-                new Message(3, 3, "text", "tag", new Date())
+                new Message(0, 2, "username", "text", "tag", new Date()),
+                new Message(1, 0, "username", "text", "tag", new Date()),
+                new Message(2, 1, "username", "text", "tag", new Date()),
+                new Message(3, 3, "username", "text", "tag", new Date())
         );
 
-        ISpitterService spitterService = mock(SpitterService.class);
+        IMessageService messageService = mock(MessageService.class);
 
-        when(spitterService.getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE))
+        when(messageService.getRecentMessages(DEFAULT_SPITTERS_PER_PAGE))
                 .thenReturn(messages);
 
-        HomeController homeController = new HomeController(spitterService);
+        HomeController homeController = new HomeController(messageService);
         HashMap<String, Object> model = new HashMap<>();
 
         String viewName = homeController.showHomePage(model);
@@ -53,6 +52,6 @@ public class HomeControllerTest {
         assertEquals(viewName, "home");
 
         assertSame(messages, model.get("messages"));
-        verify(spitterService).getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE);
+        verify(messageService).getRecentMessages(DEFAULT_SPITTERS_PER_PAGE);
     }
 }

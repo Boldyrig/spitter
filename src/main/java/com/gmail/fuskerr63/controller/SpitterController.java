@@ -24,17 +24,6 @@ public class SpitterController {
         this.spitterService = spitterService;
     }
 
-    @RequestMapping(value = "/messages", method = RequestMethod.GET)
-    public String listMessagesForSpitter(
-            @RequestParam("spitter") String name,
-            Model model
-    ) {
-        Spitter spitter = spitterService.getSpitterByName(name);
-        model.addAttribute("spitter", spitter);
-        model.addAttribute("messages", spitterService.getMessagesForSpitter(spitter));
-        return "messages/list";
-    }
-
     @RequestMapping(method = RequestMethod.GET, params = "new")
     public String createSpitterProfile(Model model) {
         model.addAttribute("spitter", new Spitter());

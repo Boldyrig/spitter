@@ -9,23 +9,18 @@
     <h3>Java was originally developed by James Gosling at Sun Microsystems</h3>
     <ol class="spittle-list">
         <c:forEach var="message" items="${messages}">
-            <%--<s:url value="/spitters/{spitterName}" var="spitter_url">
-                <s:param name="spitterName" value="${message.}"/>
-            </s:url>--%>
-
+            <s:url value="/spitter/{spitterName}" var="spitter_url">
+                <s:param name="spitterName" value="${message.userName}"/>
+            </s:url>
             <li>
                 <span class="spittleListImage">
-                    <img src="<s:url value="/resources/images//spitter_avatar.png"/>"
+                    <img src="<s:url value="/resources/${message.userId}.png"/>"
                          width="48"
                          border="0"
-                         align="middle"/>
+                         align="middle"
+                         alt="/resources/images/spitter_avatar.png"/>
                 </span>
                 <span class="spitterListText">
-                   <%-- <a href="${spitter_url}">
-                        <c:out value="${message.userId}"/>
-                        <span> : </span>
-                        <c:out value="${message.id}"/>
-                    </a>--%>
                     <c:out value="${message.text}"/><br/>
                     <small>
                         <fmt:formatDate value="${message.date}" pattern="hh:mma MMM d. yyyy"/>

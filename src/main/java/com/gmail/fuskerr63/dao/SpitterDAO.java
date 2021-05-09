@@ -1,11 +1,11 @@
 package com.gmail.fuskerr63.dao;
 
 import com.gmail.fuskerr63.domain.Spitter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
+import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class SpitterDAO {
     JdbcTemplate jdbcTemplate;
 
-    @Autowired
+    @Inject
     public SpitterDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
