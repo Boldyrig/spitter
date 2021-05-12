@@ -13,7 +13,7 @@
                        value="/WEB-INF/views/tiles/signin_signup.jsp"/>
     </definition>
 
-    <definition name="edit" extends="template">
+    <definition name="message" extends="template">
         <put-attribute name="content" value="/WEB-INF/views/message/message.jsp"/>
     </definition>
 

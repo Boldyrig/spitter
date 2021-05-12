@@ -1,5 +1,6 @@
 package com.gmail.fuskerr63.controller;
 
+import com.gmail.fuskerr63.domain.ShortSpitter;
 import com.gmail.fuskerr63.domain.Spitter;
 import com.gmail.fuskerr63.service.ISpitterService;
 import org.apache.commons.io.FileUtils;
@@ -63,6 +64,19 @@ public class SpitterController {
         Spitter spitter = spitterService.getSpitterByUsername(username);
         model.addAttribute(spitter);
         return "spitter/profile";
+    }
+
+    @RequestMapping(value = "/authentication", method = RequestMethod.POST)
+    public String authenticationSpitter(
+            ShortSpitter shortSpitter,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        Spitter spitter = spitterService.getSpitterByUsername(shortSpitter.getUsername());
+        if(spitter != null && spitter.getPassword().equals(shortSpitter.getPassword())) { //TODO
+            return "redirect:/spitter/" + spitter.getUsername();
+        }
+        return "home";
     }
 
     private void validateImage(MultipartFile image) {

@@ -1,7 +1,7 @@
 package com.gmail.fuskerr63.dao;
 
 import com.gmail.fuskerr63.domain.Spitter;
-import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -35,7 +35,11 @@ public class SpitterDAO {
     }
 
     public Spitter getSpitterByUsername(String username) {
-        return jdbcTemplate.queryForObject(SELECT_SPITTER_BY_USERNAME, new SpitterRowMapper(), username);
+        try {
+            return jdbcTemplate.queryForObject(SELECT_SPITTER_BY_USERNAME, new SpitterRowMapper(), username);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     private class SpitterRowMapper implements RowMapper<Spitter> {

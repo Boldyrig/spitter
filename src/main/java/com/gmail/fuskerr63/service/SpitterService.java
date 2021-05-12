@@ -1,13 +1,11 @@
 package com.gmail.fuskerr63.service;
 
 import com.gmail.fuskerr63.dao.SpitterDAO;
-import com.gmail.fuskerr63.domain.Message;
 import com.gmail.fuskerr63.domain.Spitter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service

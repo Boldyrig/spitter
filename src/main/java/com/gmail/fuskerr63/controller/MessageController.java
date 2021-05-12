@@ -36,7 +36,7 @@ public class MessageController {
         model.addAttribute("spitter", spitter);
         model.addAttribute("messages", messageService.getMessagesForSpitter(spitter));
         model.addAttribute("message", new Message());
-        return "messages/list";
+        return "list";
     }
 
     @RequestMapping(method = RequestMethod.POST)

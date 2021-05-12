@@ -1,6 +1,7 @@
 package com.gmail.fuskerr63.controller;
 
 import com.gmail.fuskerr63.domain.Message;
+import com.gmail.fuskerr63.domain.ShortSpitter;
 import com.gmail.fuskerr63.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class HomeController {
     @RequestMapping
     public String showHomePage(Map<String, Object> model) {
         List<Message> messages = messageService.getRecentMessages(DEFAULT_SPITTERS_PER_PAGE);
+        model.put("shortSpitter", new ShortSpitter());
         model.put("messages", messages);
         return "home";
     }

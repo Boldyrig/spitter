@@ -58,7 +58,6 @@ public class MessageDAO {
         criteriaQuery.select(rootMessage);
 
         Query<Message> query = getCurrentSession().createQuery(criteriaQuery).setMaxResults(count);
-        String queryString = query.getQueryString();
         return query.getResultList();
     }
 }
