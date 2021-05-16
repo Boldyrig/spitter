@@ -1,16 +1,16 @@
 package controller;
 
 import com.gmail.fuskerr63.controller.HomeController;
+import com.gmail.fuskerr63.domain.Message;
 import com.gmail.fuskerr63.domain.Spitter;
+import com.gmail.fuskerr63.service.IMessageService;
 import com.gmail.fuskerr63.service.ISpitterService;
+import com.gmail.fuskerr63.service.MessageService;
 import com.gmail.fuskerr63.service.SpitterService;
 
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,25 +26,32 @@ public class HomeControllerTest {
     @Test
     public void shouldDisplayRecentSpitters() {
         List<Spitter> spitters = asList(
-                new Spitter(0, "name1", "message1", "tag1", new Date()),
-                new Spitter(1, "name2", "message2", "tag2", new Date()),
-                new Spitter(2, "name3", "message3", "tag3", new Date()),
-                new Spitter(3, "name4", "message4", "tag4", new Date())
+                new Spitter(0, "name1", "username1"),
+                new Spitter(1, "name2", "username2"),
+                new Spitter(2, "name3", "username3"),
+                new Spitter(3, "name4", "username4")
         );
 
-        ISpitterService spitterService = mock(SpitterService.class);
+        List<Message> messages = asList(
+                new Message(0, 2, "username", "text", "tag", new Date(), false),
+                new Message(1, 0, "username", "text", "tag", new Date(), false),
+                new Message(2, 1, "username", "text", "tag", new Date(), false),
+                new Message(3, 3, "username", "text", "tag", new Date(), false)
+        );
 
-        when(spitterService.getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE))
-                .thenReturn(spitters);
+        IMessageService messageService = mock(MessageService.class);
 
-        HomeController homeController = new HomeController(spitterService);
+        when(messageService.getRecentMessages(DEFAULT_SPITTERS_PER_PAGE))
+                .thenReturn(messages);
+
+        HomeController homeController = new HomeController(messageService);
         HashMap<String, Object> model = new HashMap<>();
 
         String viewName = homeController.showHomePage(model);
 
         assertEquals(viewName, "home");
 
-        assertSame(spitters, model.get("spitters"));
-        verify(spitterService).getRecentSpitters(DEFAULT_SPITTERS_PER_PAGE);
+        assertSame(messages, model.get("messages"));
+        verify(messageService).getRecentMessages(DEFAULT_SPITTERS_PER_PAGE);
     }
 }

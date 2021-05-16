@@ -5,16 +5,13 @@
 
 <tiles-definitions>
 
-    <definition name="template"
+    <definition name="message"
                 template="/WEB-INF/views/main_template.jsp">
         <put-attribute name="top"
-                        value="/WEB-INF/views/tiles/spittle_form.jsp"/>
+                       value="/WEB-INF/views/tiles/spittle_form.jsp"/>
         <put-attribute name="side"
-                       value="/WEB-INF/views/tiles/signin_signup.jsp"/>
-    </definition>
-
-    <definition name="home" extends="template">
-        <put-attribute name="content" value="/WEB-INF/views/home.jsp"/>
+                       value="/WEB-INF/views/tiles/pfofile_side.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/views/message/message.jsp"/>
     </definition>
 
 </tiles-definitions>
