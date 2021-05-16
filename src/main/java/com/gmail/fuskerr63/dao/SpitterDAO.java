@@ -19,7 +19,7 @@ public class SpitterDAO {
     }
 
     private final String INSERT_SPITTER_SQL =
-            "INSERT INTO spitter (name, username, password, email, update_by_email) VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO spitter (name, username, password, email, update_by_email, is_image_upload) VALUES (?, ?, ?, ?, ?, ?)";
     private final String SELECT_SPITTER_BY_USERNAME =
             "SELECT * FROM spitter WHERE username=?";
 
@@ -30,7 +30,8 @@ public class SpitterDAO {
                 spitter.getUsername(),
                 spitter.getPassword(),
                 spitter.getEmail(),
-                spitter.isUpdateByEmail()
+                spitter.isUpdateByEmail(),
+                spitter.isImageUpload()
         );
     }
 
@@ -51,7 +52,8 @@ public class SpitterDAO {
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
-                    resultSet.getBoolean("update_by_email")
+                    resultSet.getBoolean("update_by_email"),
+                    resultSet.getBoolean("is_image_upload")
             );
         }
     }

@@ -13,7 +13,14 @@
         <c:forEach items="${messages}" var="message">
             <tr>
                 <td>
-                    <img src="/resources/images/spitter_avatar.png" width="48" height="48"/>
+                    <c:choose>
+                        <c:when test="${spitter.imageUpload == true}">
+                            <img src="/resources/${spitter.username}.jpg" width="100px"/>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/resources/images/spitter_avatar.png" width="48" height="48"/>
+                        </c:otherwise>
+                    </c:choose>
                 </td>
                 <td>
                     <a href="/spitter/${spitter.username}">${message.userId}</a>

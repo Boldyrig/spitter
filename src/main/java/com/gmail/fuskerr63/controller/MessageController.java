@@ -41,7 +41,10 @@ public class MessageController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String addMessageFromForm(Message message) {
+        String username = message.getUserName();
+        Spitter spitter = spitterService.getSpitterByUsername(username);
+        message.setImageUpload(spitter.isImageUpload());
         messageService.addMessage(message);
-        return "redirect:message?username=" + message.getUserName();
+        return "redirect:message?username=" + username;
     }
 }

@@ -26,13 +26,17 @@ public class Message {
     @Column(name = "date")
     private Date date;
 
-    public Message(int id, int userId, String userName, String text, String tag, Date date) {
+    @Column(name = "is_image_upload")
+    private boolean isImageUpload;
+
+    public Message(int id, int userId, String userName, String text, String tag, Date date, boolean isImageUpload) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
         this.text = text;
         this.tag = tag;
         this.date = date;
+        this.isImageUpload = isImageUpload;
     }
 
     public Message() {
@@ -63,6 +67,10 @@ public class Message {
         return userName;
     }
 
+    public boolean getImageUpload() {
+        return isImageUpload;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -81,5 +89,9 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setImageUpload(boolean imageUpload) {
+        isImageUpload = imageUpload;
     }
 }

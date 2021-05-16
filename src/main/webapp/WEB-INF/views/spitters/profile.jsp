@@ -4,5 +4,8 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <div>
     <h2>Profile for ${spitter.username} (${spitter.name})</h2>
-
+    <button>
+        <a href="/message?username=${spitter.username}">Send new message</a>
+    </button>
+    <a href="/">Go To Home Page</a>
 </div>

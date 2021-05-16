@@ -33,10 +33,10 @@ public class HomeControllerTest {
         );
 
         List<Message> messages = asList(
-                new Message(0, 2, "username", "text", "tag", new Date()),
-                new Message(1, 0, "username", "text", "tag", new Date()),
-                new Message(2, 1, "username", "text", "tag", new Date()),
-                new Message(3, 3, "username", "text", "tag", new Date())
+                new Message(0, 2, "username", "text", "tag", new Date(), false),
+                new Message(1, 0, "username", "text", "tag", new Date(), false),
+                new Message(2, 1, "username", "text", "tag", new Date(), false),
+                new Message(3, 3, "username", "text", "tag", new Date(), false)
         );
 
         IMessageService messageService = mock(MessageService.class);

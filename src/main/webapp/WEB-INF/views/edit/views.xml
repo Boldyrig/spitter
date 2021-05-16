@@ -5,16 +5,12 @@
 
 <tiles-definitions>
 
-    <definition name="template"
+    <definition name="edit"
                 template="/WEB-INF/views/main_template.jsp">
         <put-attribute name="top"
                        value="/WEB-INF/views/tiles/spittle_form.jsp"/>
         <put-attribute name="side"
-                       value="/WEB-INF/views/tiles/signin_signup.jsp"/>
-    </definition>
-
-    <definition name="edit" extends="template">
+                       value="/WEB-INF/views/tiles/signup_side.jsp"/>
         <put-attribute name="content" value="/WEB-INF/views/edit/edit.jsp"/>
     </definition>
-
 </tiles-definitions>

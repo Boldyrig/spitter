@@ -39,20 +39,22 @@ public class SpitterController {
         if(bindingResult.hasErrors()) {
             return "edit";
         }
-        boolean isSpitterSaved = spitterService.saveSpitter(spitter);
-
-        if(!isSpitterSaved) {
-            bindingResult.rejectValue("username", "error.spitter", "already exist in database");
-            return "edit";
-        }
 
         try {
             if(!image.isEmpty()) {
                 validateImage(image);
-                saveImage(spitter.getId() + ".jpg", image);
+                boolean isImageSaved = saveImage(spitter.getUsername() + ".jpg", image);
+                spitter.setImageUpload(isImageSaved);
             }
         } catch(ImageUploadException e) {
             bindingResult.reject(e.getMessage());
+            return "edit";
+        }
+
+        boolean isSpitterSaved = spitterService.saveSpitter(spitter);
+
+        if(!isSpitterSaved) {
+            bindingResult.rejectValue("username", "error.spitter", "already exist in database");
             return "edit";
         }
 
@@ -76,7 +78,7 @@ public class SpitterController {
         if(spitter != null && spitter.getPassword().equals(shortSpitter.getPassword())) { //TODO
             return "redirect:/spitter/" + spitter.getUsername();
         }
-        return "home";
+        return "redirect:/home";
     }
 
     private void validateImage(MultipartFile image) {
@@ -85,13 +87,16 @@ public class SpitterController {
         }
     }
 
-    private void saveImage(String filename, MultipartFile image) throws ImageUploadException {
+    private boolean saveImage(String filename, MultipartFile image) throws ImageUploadException {
+        boolean imageSaved = false;
         try {
             File file = new File( "src/main/webapp/resources/" + filename);
             FileUtils.writeByteArrayToFile(file, image.getBytes());
+            imageSaved = true;
         } catch (IOException e) {
             throw new ImageUploadException("Unable to save image", e);
         }
+        return imageSaved;
     }
 
     private static class ImageUploadException extends RuntimeException {

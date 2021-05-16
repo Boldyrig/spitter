@@ -1,7 +1,5 @@
 package com.gmail.fuskerr63.domain;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -30,6 +28,7 @@ public class Spitter {
     public String email;
 
     public boolean updateByEmail;
+    public boolean isImageUpload;
 
     public Spitter() {
     }
@@ -40,13 +39,14 @@ public class Spitter {
         this.username = username;
     }
 
-    public Spitter(int id, String name, String username, String password, String email, boolean updateByEmail) {
+    public Spitter(int id, String name, String username, String password, String email, boolean updateByEmail, boolean isImageUpload) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.updateByEmail = updateByEmail;
+        this.isImageUpload = isImageUpload;
     }
 
     public int getId() {
@@ -73,6 +73,10 @@ public class Spitter {
         return updateByEmail;
     }
 
+    public boolean isImageUpload() {
+        return isImageUpload;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -95,5 +99,9 @@ public class Spitter {
 
     public void setUpdateByEmail(boolean updateByEmail) {
         this.updateByEmail = updateByEmail;
+    }
+
+    public void setImageUpload(boolean imageUpload) {
+        isImageUpload = imageUpload;
     }
 }

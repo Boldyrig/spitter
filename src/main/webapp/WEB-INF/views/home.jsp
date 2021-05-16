@@ -14,11 +14,14 @@
             </s:url>
             <li>
                 <span class="spittleListImage">
-                    <img src="<s:url value="/resources/${message.userId}.png"/>"
-                         width="48"
-                         border="0"
-                         align="middle"
-                         alt="/resources/images/spitter_avatar.png"/>
+                    <c:choose>
+                        <c:when test="${message.imageUpload == true}">
+                            <img src="/resources/${message.userName}.jpg" width="100px"/>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/resources/images/spitter_avatar.png" width="48" height="48"/>
+                        </c:otherwise>
+                    </c:choose>
                 </span>
                 <span class="spitterListText">
                     <c:out value="${message.text}"/><br/>

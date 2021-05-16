@@ -5,15 +5,12 @@
 
 <tiles-definitions>
 
-    <definition name="template"
+    <definition name="spitter/profile"
                 template="/WEB-INF/views/main_template.jsp">
         <put-attribute name="top"
                        value="/WEB-INF/views/tiles/spittle_form.jsp"/>
         <put-attribute name="side"
                        value="/WEB-INF/views/tiles/profile_side.jsp"/>
-    </definition>
-
-    <definition name="spitter/profile" extends="template">
         <put-attribute name="content" value="/WEB-INF/views/spitters/profile.jsp"/>
     </definition>
 
